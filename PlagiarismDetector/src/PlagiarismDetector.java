@@ -49,7 +49,7 @@ public class PlagiarismDetector
 	}
 	
 	/**
-	 * Creates a dictionary of the synonym words using the file passes in. 
+	 * Creates a dictionary of the synonym words using the file passed in. 
 	 * Maps all the synonym words to one synonym word value to make it more space efficient. 
 	 * @return
 	 * @throws IOException
