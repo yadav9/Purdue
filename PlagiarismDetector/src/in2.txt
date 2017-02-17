@@ -1,0 +1,80 @@
+  static String printPortfolioHoldings(String portfolioString) {
+        
+        String[] benchmark = portfolioString.split(COLON);
+        String[] holdingsInBenchmark = benchmark[0].split(SEPARATOR);
+        ArrayList<String> listOfHoldings = new ArrayList<String>();
+        
+        for(String item : holdingsInBenchmark)
+        {
+            String temp = "";
+            String[] elementsOfHolding = item.split(",");
+            temp = "[" + elementsOfHolding[0] + ", " + elementsOfHolding[1] + ", " + elementsOfHolding[2] + "]";
+            listOfHoldings.add(temp);
+        }
+        
+        Collections.sort(listOfHoldings);
+        String result = "";
+        
+        for(String item : listOfHoldings)
+        {
+            result += item + ", ";
+        }
+
+        return result.substring(0, result.length() - 2);
+    }
+    
+    static String printBenchmarkHoldings(String portfolioString) {
+        
+        String[] benchmark = portfolioString.split(COLON);
+        String[] holdingsInBenchmark = benchmark[1].split(SEPARATOR);
+        ArrayList<String> listOfHoldings = new ArrayList<String>();
+        
+        for(String item : holdingsInBenchmark)
+        {
+            String temp = "";
+            String[] elementsOfHolding = item.split(",");
+            temp = "[" + elementsOfHolding[0] + ", " + elementsOfHolding[1] + ", " + elementsOfHolding[2] + "]";
+            listOfHoldings.add(temp);
+        }
+        
+        Collections.sort(listOfHoldings);
+        String result = "";
+        
+        for(String item : listOfHoldings)
+        {
+            result += item + ", ";
+        }
+
+        return result.substring(0, result.length() - 2);
+    }
+    static String generateTransactions(String input) {
+        
+        String portfolio = printPortfolioHoldings(input);
+        String benchmark = printBenchmarkHoldings(input);
+    
+        
+        String[] portfolios = portfolio.split("],");
+        String[] benchmarks = benchmark.split("],");
+        String result = "";
+        for(int i = 0; i < portfolios.length; ++i)
+        {
+            portfolios[i].replace("[","");
+            portfolios[i].replace("]","");
+            benchmarks[i].replace("[","");
+            benchmarks[i].replace("]","");
+            String[] tempPortfolio = portfolios[i].split(",");
+            String[] tempBenchmark = benchmarks[i].split(",");
+            double factor = Double.parseDouble(tempPortfolio[2].replace("]","")) - Double.parseDouble(tempBenchmark[2].replace("]",""));
+            String factorString = String.format("%.2f", Math.abs(factor));
+            if(factor > 0)
+            {
+                result += "[SELL, " + tempPortfolio[0].replace("[" , "").trim() + ", " + factorString +  "]" + ", ";   
+            }
+            else
+            {
+                result += "[BUY, "  + tempPortfolio[0].replace("[" , "").trim() + ", " + factorString +  "]" + ", ";
+            }            
+        }
+
+        return result.substring(0, result.length() - 2);    
+    }
