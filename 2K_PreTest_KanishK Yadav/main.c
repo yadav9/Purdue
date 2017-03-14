@@ -99,9 +99,11 @@ void readFromFileAndFillAdjMatrix(FILE *fMap, int **map, int numOfCities)
 {
     int row = 0;
     int col = 0;
-    char line[256];
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
 
-    while(fgets(line, sizeof(line), fMap))
+    while((read = getline(&line, &len, fMap)) != -1)
     {
         char *tempLine = strtok(line," ");
         col = 0;
@@ -210,7 +212,7 @@ void findMinTimeToDeliverAllMsgs(int **map, int src, int numOfCities)
 /*
 * @description : frees the memory for the 2d Adj. matrix
 * @return : void
-* @argument : takes in size of 2d square array and pointer to 2d array 
+* @argument : takes in size of 2d square array and pointer to 2d array
 */
 
 void freeMapMemory(int **map, int size)
