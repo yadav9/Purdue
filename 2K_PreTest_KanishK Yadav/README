@@ -1,0 +1,50 @@
+// ~ Introduction ~ //
+
+In this program, I implemented Dijkstra's Algorithm to find the minimum amount
+of time required to deliver messages throughout the whole kingdom. I thought
+of time to reach from one city to another as distance (that's what I made weight
+in my graph). I did this first by finding the minimum times (shortest distance)
+to reach all cities from capitol city and returning the largest of all shortest
+values. I chose the largest of all shortest values since by the time we reach the
+farthest value, we would have visited every other place.
+
+
+
+// ~ Getting Started ~ //
+
+There are 3 files in the folder-
+1) main.c - contains the entire code
+2) Makefile - used for compilation of the file
+3) README (this file)
+
+
+
+// ~ Input Format ~ //
+
+The program takes an input file with the information in format as described in
+the Pre Test document.
+
+
+
+// ~ Output Format ~ //
+
+The program prints the result to the terminal. If required for testing, you can
+get rid of extra printed stuff in findMinTimeToDeliverAllMsgs() in main.c and
+just print the integer result.
+
+// ~ Assumptions ~ //
+
+The program assumes that input time will always be positive. It also assumes
+that all cities are reachable using some path from capitol city. The program also 
+assumes that the input time is an integer (int data type can hold its value
+without overflow).
+
+
+
+// ~ Summary ~ //
+
+# Compile
+> make
+
+# Run
+> ./main "Input Map File"
